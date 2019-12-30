@@ -15,4 +15,4 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 include 'inc/init.php';
 include 'inc/custom-post-types.php';
 include 'inc/functions.php';
-include 'inc/admin.php';
+// include 'inc/admin.php';
