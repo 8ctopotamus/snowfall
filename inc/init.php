@@ -6,25 +6,6 @@ function snowfall_actions() {
   include( plugin_dir_path( __DIR__ ) . 'inc/actions.php' );
 }
 
-
-/*
- * Admin scripts and styles
- */
-function snowfall_wp_admin_assets( $hook ) {
-  wp_register_style('snowfall_admin_styles', plugin_dir_url( __DIR__ ) . '/css/admin.css', false, '1.0.0');
-  wp_register_script('snowfall_admin_js', plugin_dir_url( __DIR__ ) . '/js/admin.js', array('jquery'), '', true);
-
-  if ( $hook === 'toplevel_page_snowfall' ) {
-    wp_enqueue_style( 'snowfall_admin_styles' );
-    wp_localize_script( 'snowfall_admin_js', 'wp_data', array(
-      'ajax_url' => admin_url( 'admin-ajax.php' ),
-    ));
-    wp_enqueue_script( 'snowfall_admin_js' );
-  }
-}
-add_action( 'admin_enqueue_scripts', 'snowfall_wp_admin_assets' );
-
-
 /**
  * Adds "Import" button and form on listing page
  */
@@ -53,7 +34,9 @@ function addCustomImportButton() {
             .after('<a href="#" class="page-title-action toggle-upload">Import CSV</a>');
           
           $('body').on('click', '.toggle-upload', function() {
-            $('#csv-upload').toggle();
+            const ok = confirm('I understand that uploading a CSV will overwrite all existing posts.');
+            if (ok)
+              $('#csv-upload').toggle();
           });
         });
       })(jQuery)
