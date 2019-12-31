@@ -1,5 +1,17 @@
 <?php 
 
+/**
+ * Never worry about cache again!
+ */
+function my_load_scripts() {
+  wp_register_script( 'chart_js', 'https://cdn.jsdelivr.net/npm/chart.js@2.8.0', array(), false, true );
+  if (is_singular('snowfall_cities')) {
+    wp_enqueue_script( 'chart_js' );
+  }
+}
+add_action('wp_enqueue_scripts', 'my_load_scripts');
+
+
 // Ajax routes
 add_action( 'wp_ajax_snowfall_actions', 'snowfall_actions' );
 function snowfall_actions() {
