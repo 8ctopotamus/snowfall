@@ -11,8 +11,8 @@ function generate_post_content($data) {
   $content .= '<p>So we enlisted the help of some of the leading winter-expert Meteorologists to collect snow records throughout the United States. SPN has assimilated snow record data from over 220 U.S. Cities including ' . $cityState . '.</p>';
   // one day
   $content .= '<h3>Greatest Amount of Snow in One Day:</h3>';
-  $content .= '<p>The record of a one day snowfall for '. $cityState .' is ' . $data['1 day QTY'] . ' inches occurring on ' . $data['1 day DATE'] . '.</p>';
-  $content .= '<canvas id="most-snow-1-day" aria-label="Most snow in one day" role="img">
+  $content .= '<p>The record of a one day snowfall for '. $cityState .' is ' . $data['1 days QTY'] . ' inches occurring on ' . $data['1 days DATE'] . '.</p>';
+  $content .= '<canvas id="most-snow-1-days" aria-label="Most snow in one day" role="img">
     <p>Chart for most snow in one day</p>
   </canvas>';
   // two days
