@@ -43,6 +43,7 @@ function addCustomImportButton() {
           </form>`;
           
           $($(".wrap .page-title-action")[0])
+            .hide()
             .after(uploadFormHTML)
             .after('<a href="#" class="page-title-action toggle-upload">Import CSV</a>');
           

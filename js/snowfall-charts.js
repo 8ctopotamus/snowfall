@@ -25,7 +25,7 @@ function renderDayCharts(numDays) {
               return dates[tooltipItem[0].index];
           }
         }
-      }
+      },
     }
   });
 }
