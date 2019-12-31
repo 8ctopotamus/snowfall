@@ -51,7 +51,7 @@ function generate_posts($city_data) {
       'post_type' => 'snowfall_cities',
       'post_status' => 'publish',
       'post_content' => generate_post_content($data),
-      'meta_input' => array_slice($data, 3),
+      'meta_input' => $data,
     ];
     wp_insert_post($postarr);
   }
@@ -102,7 +102,7 @@ function upload_csv() {
     delete_custom_posts();
     generate_posts($city_data);
   } else {
-    echo 'No CSV provided.';
+    echo 'Error: No CSV provided.';
     http_response_code(500);
   }
   header('Location: ' . $_SERVER['HTTP_REFERER']);
