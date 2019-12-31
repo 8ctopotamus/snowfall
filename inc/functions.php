@@ -12,20 +12,26 @@ function generate_post_content($data) {
   // one day
   $content .= '<h3>Greatest Amount of Snow in One Day:</h3>';
   $content .= '<p>The record of a one day snowfall for '. $cityState .' is ' . $data['1 day QTY'] . ' inches occurring on ' . $data['1 day DATE'] . '.</p>';
-  $content .= '<canvas id="most-snow-1-day"></canvas>';
+  $content .= '<canvas id="most-snow-1-day" aria-label="Most snow in one day" role="img">
+    <p>Chart for most snow in one day</p>
+  </canvas>';
   // two days
   $content .= '<h3>Greatest Amount of Snow in Trow Days:</h3>';
   $content .= 'The record of a one day snowfall for ' . $cityState . ' is (Amount) inches started on (Day, Mo, Year) and ended on (Day, Mo, Year)';
-  // chart
+  $content .= '<canvas id="most-snow-2-days"> aria-label="Most snow in two days" role="img">
+    <p>Chart for most snow in two days</p>
+  </canvas>';
   // three days
   $content .= '<h3>Greatest Amount of Snow in Three Days:</h3>';
   $content .= 'The record of a one day snowfall for ' . $cityState . ' is (Amount) inches started on (Day, Mo, Year) and ended on (Day, Mo, Year)';
-  // chart
+  $content .= '<canvas id="most-snow-3-days">aria-label="Most snow in three days" role="img">
+    <p>Chart for most snow in three days</p>
+  </canvas>';
   // greatest
   $content .= '<h3>Greatest Snowfall in One Season</h3>';
   $content .= '<p>At this point most folks are wondering what the greatest amount of snow has been recorded for ' . $cityState . ' in any given season.</p>';
   $content .= '<p>The greatest cumulative snow fall for ' . $cityState . ' is (Value) inches for the year ending (Day, Mo, Year).</p>';
-  // chart here
+  $content .= '<canvas id="greatest-snowfall"></canvas>';
   $content .= '<p>For additional snow and winter records research you can check out the <a href="#">SPN snow records page</a>.</p>';
 
   return $content;

@@ -1,12 +1,13 @@
 <?php 
 
-/**
- * Never worry about cache again!
- */
 function my_load_scripts() {
+  $city_data = get_option('all_snowfall_data');
   wp_register_script( 'chart_js', 'https://cdn.jsdelivr.net/npm/chart.js@2.8.0', array(), false, true );
+  wp_register_script( 'snowfall_charts', plugins_url('js/snowfall-charts.js', __DIR__ ), array(), false, true );
   if (is_singular('snowfall_cities')) {
     wp_enqueue_script( 'chart_js' );
+    wp_localize_script( 'snowfall_charts', 'wp_data', array('all_snowfall_data' => $city_data) );
+    wp_enqueue_script('snowfall_charts');
   }
 }
 add_action('wp_enqueue_scripts', 'my_load_scripts');
