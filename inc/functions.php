@@ -6,23 +6,14 @@ function generate_post_content($data) {
   $threeDaysEndDate = date('Y-m-d', strtotime($data['3 days DATE'] . " + 2 days"));
 
   $content = '<p>First snows, Record snow, Multi-Day storms, Blizzards, and general snowfall information can be tough to find. You might be looking to move to a new city or have just moved and you are maybe fearful of how bad winter can get.</p>';
-  $content .= '<a href="https://www.snowplownews.com/winter-weather-news.cfm" title="Snow Plow News - Winter Weather News / Snow Research">
-    <p>Source: <cite>Snow Plow News - Winter Weather News / Snow Research</a></cite></p>
-    <img src="'. esc_url( plugins_url( '../img/spn-weather-research-map.jpg', __FILE__ ) ) .'" alt="Snow Plow News Winter Weather Research Screenshot">
-  </a>';
-  $content .= '<p>Winter snow records are typically hard to find so we first looked toward the <a href="https://www.noaa.gov" title="NOAA website" target="_blank" rel="noreferrer noopener">NOAA (National Oceanic and Atmospheric Association)</a> to see if these all-important records could be found.</p>
-  <p>Here is the records section of the NOAA site – it is not that easy to navigate.  We also found that these snowfall records do not exist in one spot – the records come from many reporting authorities all over the U.S.</p>';
-  $content .= '<img src="'. esc_url( plugins_url( '../img/noa-screenshot.jpg', __FILE__ ) ) .'" alt="Snow Plow News Winter Weather Research Screenshot">';
-  $content .= '<p>So we enlisted the help of some of the leading winter-expert Meteorologists to collect snow records throughout the United States. SPN has assimilated snow record data from over 220 U.S. Cities including ' . $cityState . '.</p>';
 
   // tabs
   $content .= '<div id="chart-tabs" class="tabs">
-	<nav class="tab-list">
-		<a class="tab tab-active" href="#one">One Day</a>
-		<a class="tab" href="#two">Two Days</a>
-    <a class="tab" href="#three">Three Days</a>
-    <a class="tab" href="#greatest">Greatest</a>
-	</nav>';
+  <nav class="tab-list">
+    <a class="tab tab-active" href="#one" data-idx="1">One Day</a>
+    <a class="tab" href="#two" data-idx="2">Two Days</a>
+    <a class="tab" href="#three" data-idx="3">Three Days</a>
+  </nav>';
 
   // one day tab
   $content .= '<div id="one" class="tab-content tab-show">';
@@ -51,20 +42,27 @@ function generate_post_content($data) {
     </canvas>
   </div>';
 
-  // greatest tab
-  $content .= '<div id="greatest" class="tab-content">';
-    $content .= '<h3>Greatest Snowfall in One Season:</h3>';
-    $content .= '<p>At this point most folks are wondering what the greatest amount of snow has been recorded for ' . $cityState . ' in any given season.</p>';
-    $content .= '<p>The greatest cumulative snow fall for ' . $cityState . ' is ' . $data['Amount'] . ' inches for the year ending ' . $data['GreatestEndingDate'] . '.</p>';
-    $content .= '<canvas id="greatest-snowfall" aria-label="Greatest Snowfall in One Season" role="img">
-      <small>Greatest Snowfall in One Season</small>
-    </canvas>
-  </div>';
-
   $content .= '</div>'; // end of tabs
   
-  $content .= '<p>For additional snow and winter records research you can check out the <a href="' . site_url() . '/snowfall_cities">SPN snow records page</a>.</p>';
+  // greatest snowfall
+  $content .= '<h3>Greatest Snowfall in One Season:</h3>';
+  $content .= '<p>At this point most folks are wondering what the greatest amount of snow has been recorded for ' . $cityState . ' in any given season.</p>';
+  $content .= '<p>The greatest cumulative snow fall for ' . $cityState . ' is ' . $data['Greatest Snowfall'] . ' inches for the year ending ' . $data['GreatestEndingDate'] . '.</p>';
+  $content .= '<canvas id="greatest-snowfall" aria-label="Greatest Snowfall in One Season" role="img">
+    <small>Greatest Snowfall in One Season</small>
+  </canvas>';
 
+  $content .= "<h3>Last Year's Storms - 12 Months in 1 Minute</h3>";
+  $content .= '<iframe src="https://www.snowplownews.com/snow-precipitation-animated.cfm" border="0" marginheight="0" marginwidth="0" scrolling="no" width="410" height="300" frameborder="1"></iframe>';
+
+  $content .= '<a href="https://www.snowplownews.com/winter-weather-news.cfm" title="Snow Plow News - Winter Weather News / Snow Research"><p>Source: <cite>Snow Plow News - Winter Weather News / Snow Research</a></cite></p></a>';
+
+  $content .= '<p>Winter snow records are typically hard to find so we first looked toward the <a href="https://www.noaa.gov" title="NOAA website" target="_blank" rel="noreferrer noopener">NOAA (National Oceanic and Atmospheric Association)</a> to see if these all-important records could be found.</p>
+  <p>Here is the records section of the NOAA site – it is not that easy to navigate.  We also found that these snowfall records do not exist in one spot – the records come from many reporting authorities all over the U.S.</p>';
+  $content .= '<img src="'. esc_url( plugins_url( '../img/noa-screenshot.jpg', __FILE__ ) ) .'" alt="Snow Plow News Winter Weather Research Screenshot">';
+  $content .= '<p>So we enlisted the help of some of the leading winter-expert Meteorologists to collect snow records throughout the United States. SPN has assimilated snow record data from over 220 U.S. Cities including ' . $cityState . '.</p>';
+  
+  $content .= '<p>For additional snow and winter records research you can check out the <a href="' . site_url() . '/snowfall_cities">SPN snow records page</a>.</p>';
 
   return $content;
 }

@@ -11,8 +11,6 @@
 } */
 
 
-
-
 .tabs {
 	max-width: 600px;
 	margin: 0 auto;
@@ -30,12 +28,18 @@
 	padding: .5rem 1rem;
 	color: rgba(255, 255, 255, .6);
 	font-weight: 700;
-	background: rgba(10, 20, 30, .2);
+	background: #71b1f1;
+	margin-right: 5px;
+	font-size: 1.5rem;
+}
+
+.tab-list {
+	display: flex;
 }
 
 .tab.tab-active {
 	color: white;
-	background: rgba(255,255,255,.1);
+	background: #2e54b7;
 	border: 1px solid rgba(255, 255, 255, .6);
 }
 

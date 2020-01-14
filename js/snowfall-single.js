@@ -2,6 +2,8 @@
   const { all_snowfall_data, current_city } = wp_data;
   const defaultColor = '#71b1f1';
   const currentCityColor = '#2e54b7';
+  const tabs = Array.from(document.getElementsByClassName('tab'));
+  const tabContent = Array.from(document.getElementsByClassName('tab-content'));
 
   const state_snowfall_data = all_snowfall_data
     .filter(city => city.STATE === current_city.STATE[0])
@@ -46,7 +48,7 @@
     });
   };
 
-  function renderDayCharts(idx) {
+  function renderDayChart(idx) {
     const ctx = getCanvas(`most-snow-${idx}-days`);
     const cityNames = state_snowfall_data.map(city => city['Name']);
     const dates = state_snowfall_data.map(city => city[`${idx} days DATE`]);
@@ -62,25 +64,20 @@
     renderHorizBarChart(ctx, cityNames, dates, qty);
   };
 
-  [1, 2, 3].forEach(idx => renderDayCharts(idx));
-
-  renderGreatestChart();
-
-
-
-  // tabs
-  const tabs = Array.from(document.getElementsByClassName('tab'));
-  const tabContent = Array.from(document.getElementsByClassName('tab-content'));
-
   function handleTabClick(e) {
     e.preventDefault();
-    const targetId = this.getAttribute('href').substring(1);
     tabs.forEach(tab => tab.classList.remove('tab-active'));
     tabContent.forEach(tC => tC.classList.remove('tab-show'));
-    this.classList.add('active');
+    const targetId = this.getAttribute('href').substring(1);
+    const idx = this.dataset.idx
+    this.classList.add('tab-active');
     document.getElementById(targetId).classList.add('tab-show');
+    renderDayChart(idx);
   };
   
   tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
+
+  renderDayChart(1)
+  renderGreatestChart();
 
 })();
