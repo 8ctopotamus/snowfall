@@ -20,7 +20,6 @@
   function renderHorizBarChart(ctx, cityNames, dates, qty) {
     new Chart(ctx, {
       type: 'horizontalBar',
-      backgroundColor: 'red',
       data: {
         labels: cityNames,
         datasets: [{
@@ -66,4 +65,22 @@
   [1, 2, 3].forEach(idx => renderDayCharts(idx));
 
   renderGreatestChart();
+
+
+
+  // tabs
+  const tabs = Array.from(document.getElementsByClassName('tab'));
+  const tabContent = Array.from(document.getElementsByClassName('tab-content'));
+
+  function handleTabClick(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href').substring(1);
+    tabs.forEach(tab => tab.classList.remove('tab-active'));
+    tabContent.forEach(tC => tC.classList.remove('tab-show'));
+    this.classList.add('active');
+    document.getElementById(targetId).classList.add('tab-show');
+  };
+  
+  tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
+
 })();
