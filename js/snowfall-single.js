@@ -3,15 +3,18 @@
   const defaultColor = '#71b1f1';
   const currentCityColor = '#2e54b7';
 
+  const state_snowfall_data = all_snowfall_data
+    .filter(city => city.STATE === current_city.STATE[0])
+
   function getCanvas(id) {
     const canvas = document.getElementById(id);
-    canvas.height = (all_snowfall_data.length * 10);
+    // canvas.height = (state_snowfall_data.length * 10);
     ctx = canvas.getContext('2d');
     return ctx;
   };
 
   function determineBarColors() {
-    return all_snowfall_data.map(city => current_city.Name[0] === city.Name ? currentCityColor : defaultColor);
+    return state_snowfall_data.map(city => current_city.Name[0] === city.Name ? currentCityColor : defaultColor);
   };
 
   function renderHorizBarChart(ctx, cityNames, dates, qty) {
@@ -46,17 +49,17 @@
 
   function renderDayCharts(idx) {
     const ctx = getCanvas(`most-snow-${idx}-days`);
-    const cityNames = all_snowfall_data.map(city => city['Name']);
-    const dates = all_snowfall_data.map(city => city[`${idx} days DATE`]);
-    const qty = all_snowfall_data.map(city => city[`${idx} days QTY`]);
+    const cityNames = state_snowfall_data.map(city => city['Name']);
+    const dates = state_snowfall_data.map(city => city[`${idx} days DATE`]);
+    const qty = state_snowfall_data.map(city => city[`${idx} days QTY`]);
     renderHorizBarChart(ctx, cityNames, dates, qty);
   };
 
   function renderGreatestChart() {
     const ctx = getCanvas('greatest-snowfall');
-    const cityNames = all_snowfall_data.map(city => city['Name']);
-    const dates = all_snowfall_data.map(city => city['GreatestEndingDate']);
-    const qty = all_snowfall_data.map(city => city['Greatest Snowfall']);
+    const cityNames = state_snowfall_data.map(city => city['Name']);
+    const dates = state_snowfall_data.map(city => city['GreatestEndingDate']);
+    const qty = state_snowfall_data.map(city => city['Greatest Snowfall']);
     renderHorizBarChart(ctx, cityNames, dates, qty);
   };
 
