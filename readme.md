@@ -1,4 +1,5 @@
-# Snowfall Records Generator
+# Snowfall Records
+
 Upload a CSV of snowfall data to generate WP posts with dynamic content and graphs. 
 
 ChartJS used for data visualizations.

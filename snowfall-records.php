@@ -1,8 +1,8 @@
 <?php
 /*
-  Plugin Name: Snowfall
+  Plugin Name: Snowfall Records
   Plugin URI:  https://zylocod.es
-  Description: Generate Snowfall data posts from CSV
+  Description: Generate Snowfall records posts from CSV
   Version:     1.0
   Author:      Zylo, LLC
   Author URI:  https://zylocod.es

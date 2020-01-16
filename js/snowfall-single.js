@@ -77,7 +77,7 @@
   
   tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
 
-  renderDayChart(1)
+  renderDayChart(1);
   renderGreatestChart();
 
 })();

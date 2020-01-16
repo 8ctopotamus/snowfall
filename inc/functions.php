@@ -1,5 +1,9 @@
 <?php
 
+function nice_date($dateString) {
+  return date("F jS, Y", strtotime($dateString)); 
+}
+
 function generate_post_content($data) {
   $cityState = $data['City'] . ', '. $data['STATE'];
   $twoDaysEndDate = date('Y-m-d', strtotime($data['2 days DATE'] . " + 1 day"));
@@ -18,7 +22,7 @@ function generate_post_content($data) {
   // one day tab
   $content .= '<div id="one" class="tab-content tab-show">';
     $content .= '<h3>Greatest Amount of Snow in One Day:</h3>';
-    $content .= '<p>The record of a one day snowfall for '. $cityState .' is ' . $data['1 days QTY'] . ' inches occurring on ' . $data['1 days DATE'] . '.</p>';
+    $content .= '<p>The record of a one day snowfall for '. $cityState .' is ' . $data['1 days QTY'] . ' inches occurring on ' . nice_date( $data['1 days DATE'] ) . '.</p>';
     $content .= '<canvas id="most-snow-1-days" aria-label="Most snow in one day" role="img">
       <small>Greatest Amount of Snow in One Day</small>
     </canvas>
@@ -27,7 +31,7 @@ function generate_post_content($data) {
   // two days tab
   $content .= '<div id="two" class="tab-content">';
     $content .= '<h3>Greatest Amount of Snow in Two Days:</h3>';
-    $content .= 'The record of a one day snowfall for ' . $cityState . ' is ' . $data['2 days QTY'] . ' inches started on ' . $data['2 days DATE'] . ' and ended on ' . $twoDaysEndDate . '.';
+    $content .= 'The record of a one day snowfall for ' . $cityState . ' is ' . $data['2 days QTY'] . ' inches started on ' . nice_date( $data['2 days DATE'] ) . ' and ended on ' . nice_date( $twoDaysEndDate ) . '.';
     $content .= '<canvas id="most-snow-2-days"> aria-label="Most snow in two days" role="img">
       <small>Greatest Amount of Snow in Two Days</small>
     </canvas>
@@ -36,10 +40,11 @@ function generate_post_content($data) {
   // three days tab
   $content .= '<div id="three" class="tab-content">';
     $content .= '<h3>Greatest Amount of Snow in Three Days:</h3>';
-    $content .= 'The record of a one day snowfall for ' . $cityState . ' is ' . $data['3 days QTY'] . ' inches started on ' . $data['3 days DATE'] . ' and ended on ' . $threeDaysEndDate . '.';
+    
     $content .= '<canvas id="most-snow-3-days">aria-label="Most snow in three days" role="img">
       <small>Greatest Amount of Snow in Three Days</small>
-    </canvas>
+    </canvas>';
+    $content .= 'The record of a one day snowfall for ' . $cityState . ' is ' . $data['3 days QTY'] . ' inches started on ' . nice_date( $data['3 days DATE'] ) . ' and ended on ' . nice_date( $threeDaysEndDate ) . '.
   </div>';
 
   $content .= '</div>'; // end of tabs
@@ -47,7 +52,7 @@ function generate_post_content($data) {
   // greatest snowfall
   $content .= '<h3>Greatest Snowfall in One Season:</h3>';
   $content .= '<p>At this point most folks are wondering what the greatest amount of snow has been recorded for ' . $cityState . ' in any given season.</p>';
-  $content .= '<p>The greatest cumulative snow fall for ' . $cityState . ' is ' . $data['Greatest Snowfall'] . ' inches for the year ending ' . $data['GreatestEndingDate'] . '.</p>';
+  $content .= '<p>The greatest cumulative snow fall for ' . $cityState . ' is ' . $data['Greatest Snowfall'] . ' inches for the year ending ' . nice_date( $data['GreatestEndingDate'] ) . '.</p>';
   $content .= '<canvas id="greatest-snowfall" aria-label="Greatest Snowfall in One Season" role="img">
     <small>Greatest Snowfall in One Season</small>
   </canvas>';
