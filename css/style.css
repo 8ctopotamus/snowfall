@@ -1,16 +1,31 @@
-/* .tab-active {
-	font-weight: 600;
+/* Archive */
+.snowfall-cities-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 30px;
 }
 
-.tab-content {
-	display: none;
-}
-
-.tab-show {
+.snowfall-city-link {
 	display: block;
-} */
+	height: 300px;
+	width: 100%;
+	text-align: center;
+}
 
+.snowfall-city-link img {
+	transition: opacity 250ms ease;
+}
 
+.snowfall-city-link:hover img {
+	opacity: .75;
+}
+
+.snowfall-city-link h3 {
+	background: white; 
+	color: #2e54b7;
+}
+
+/* Single */
 .tabs {
 	max-width: 600px;
 	margin: 0 auto;

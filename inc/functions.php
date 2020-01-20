@@ -11,8 +11,6 @@ function generate_post_content($data) {
 
   $content = '<p>First snows, Record snow, Multi-Day storms, Blizzards, and general snowfall information can be tough to find. You might be looking to move to a new city or have just moved and you are maybe fearful of how bad winter can get.</p>';
 
-  $content .= '<!--more-->';
-
   // tabs
   $content .= '<div id="chart-tabs" class="tabs">
   <nav class="tab-list">
