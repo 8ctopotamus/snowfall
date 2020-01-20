@@ -19,12 +19,12 @@ function snowfall_scripts() {
     wp_localize_script( 'snowfall_single', 'wp_data', array(
       'all_snowfall_data' => $all_cities,
       'current_city' => $current_city,
+      'site_url' => site_url(),
     ) );
     wp_enqueue_script('snowfall_single');
   }
 }
 add_action('wp_enqueue_scripts', 'snowfall_scripts');
-
 
 // Enable ajax routes
 add_action( 'wp_ajax_snowfall_actions', 'snowfall_actions' );

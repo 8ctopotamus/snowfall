@@ -1,5 +1,5 @@
 ;(function() {
-  const { all_snowfall_data, current_city } = wp_data;
+  const { all_snowfall_data, current_city, site_url } = wp_data;
   const defaultColor = '#71b1f1';
   const currentCityColor = '#2e54b7';
   const tabs = Array.from(document.getElementsByClassName('tab'));
@@ -20,7 +20,7 @@
   };
 
   function renderHorizBarChart(ctx, cityNames, dates, qty) {
-    new Chart(ctx, {
+    return new Chart(ctx, {
       type: 'horizontalBar',
       data: {
         labels: cityNames,
@@ -28,7 +28,7 @@
           label: 'Inches',
           data: qty,
           backgroundColor: determineBarColors(),
-        }]
+        }],
       },
       options: {
         tooltips: {
@@ -43,25 +43,43 @@
            display: true,
            position: 'top',
           }]
-        }
+        },
       }
     });
   };
 
+  function attachChartListeners(canvasId, chart) {
+    document.getElementById(canvasId).onclick = function(evt) {
+      var activePoints = chart.getElementsAtEvent(evt);
+      if (activePoints.length > 0) {
+        const label = activePoints[0]._model.label;
+        const city = label.split(' - ')[1].replace(' ', '-').toLowerCase();
+        const state = current_city['STATE'][0].toLowerCase();
+        console.log(state);
+        const url = `${site_url}/snowfall_cities/snow-records-for-${city}-${state}`;
+        window.location = url;
+      }
+    };
+  }
+
   function renderDayChart(idx) {
-    const ctx = getCanvas(`most-snow-${idx}-days`);
-    const cityNames = state_snowfall_data.map(city => city['Name']);
+    const id = `most-snow-${idx}-days`
+    const ctx = getCanvas(id);
+    const cityNames = state_snowfall_data.map(city => `${city['Name']} - ${city['City']}`);
     const dates = state_snowfall_data.map(city => city[`${idx} days DATE`]);
     const qty = state_snowfall_data.map(city => city[`${idx} days QTY`]);
-    renderHorizBarChart(ctx, cityNames, dates, qty);
+    const newChart = renderHorizBarChart(ctx, cityNames, dates, qty);
+    attachChartListeners(id, newChart);
   };
 
   function renderGreatestChart() {
-    const ctx = getCanvas('greatest-snowfall');
-    const cityNames = state_snowfall_data.map(city => city['Name']);
+    const id = 'greatest-snowfall'
+    const ctx = getCanvas(id);
+    const cityNames = state_snowfall_data.map(city => `${city['Name']} - ${city['City']}`);
     const dates = state_snowfall_data.map(city => city['GreatestEndingDate']);
     const qty = state_snowfall_data.map(city => city['Greatest Snowfall']);
-    renderHorizBarChart(ctx, cityNames, dates, qty);
+    const newChart = renderHorizBarChart(ctx, cityNames, dates, qty);
+    attachChartListeners(id, newChart);
   };
 
   function handleTabClick(e) {
