@@ -1,13 +1,16 @@
 /* Archive */
+.post-type-archive-snowfall_cities #primary {
+	float: none;
+}
+
 .snowfall-cities-grid {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 1rem;
 }
 
 .snowfall-city-link {
 	display: block;
-	height: 300px;
 	width: 100%;
 	text-align: center;
 }
