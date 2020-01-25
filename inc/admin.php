@@ -8,7 +8,7 @@ add_action('admin_head-edit.php','addCustomImportButton');
 function addCustomImportButton() {
   global $current_screen;
 
-  if ('snowfall_cities' != $current_screen->post_type) {
+  if ('snowfall_records' != $current_screen->post_type) {
     return;
   }
 

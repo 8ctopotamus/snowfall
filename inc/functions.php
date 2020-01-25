@@ -67,7 +67,7 @@ function generate_post_content($data) {
   $content .= '<img src="'. esc_url( plugins_url( '../img/noa-screenshot.jpg', __FILE__ ) ) .'" alt="Snow Plow News Winter Weather Research Screenshot">';
   $content .= '<p>So we enlisted the help of some of the leading winter-expert Meteorologists to collect snow records throughout the United States. SPN has assimilated snow record data from over 220 U.S. Cities including ' . $cityState . '.</p>';
   
-  $content .= '<p>For additional snow and winter records research you can check out the <a href="' . site_url() . '/snowfall_cities">SPN snow records page</a>.</p>';
+  $content .= '<p>For additional snow and winter records research you can check out the <a href="' . site_url() . '/snowfall_records">SPN snow records page</a>.</p>';
 
   return $content;
 }
@@ -76,7 +76,8 @@ function generate_posts($city_data) {
   foreach($city_data as $data) {
     $postarr = [
       'post_title' => 'Snow Records for ' . $data['City'] . ', ' . $data['STATE'],
-      'post_type' => 'snowfall_cities',
+      'post_name' => $data['City'] . '-' . $data['STATE'], // slug
+      'post_type' => 'snowfall_records',
       'post_status' => 'publish',
       'post_content' => generate_post_content($data),
       'meta_input' => $data,
@@ -87,7 +88,7 @@ function generate_posts($city_data) {
 
 function delete_custom_posts(){
   global $wpdb;
-  $post_type = 'snowfall_cities';
+  $post_type = 'snowfall_records';
   $result = $wpdb->query( 
     $wpdb->prepare("
       DELETE posts,pt,pm
