@@ -55,7 +55,6 @@
         const label = activePoints[0]._model.label;
         const city = label.split(' - ')[1].replace(' ', '-').toLowerCase();
         const state = current_city['STATE'][0].toLowerCase();
-        console.log(state);
         const url = `${site_url}/snowfall_records/${city}-${state}`;
         window.location = url;
       }

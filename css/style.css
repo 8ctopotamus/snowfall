@@ -29,6 +29,11 @@
 }
 
 /* Single */
+
+.single-snowfall_records canvas {
+	cursor: pointer;
+}
+
 .tabs {
 	max-width: 600px;
 	margin: 0 auto;

@@ -3,7 +3,7 @@
 function snowfall_scripts() {
   global $post;
   $all_cities = get_option('all_snowfall_data');
-  $current_city = get_post_meta( $post->ID);
+  $current_city = get_post_meta($post->ID);
 
   wp_register_style( 'snowfall_styles', plugins_url('css/style.css', __DIR__ ) );  
   wp_register_script( 'chart_js', 'https://cdn.jsdelivr.net/npm/chart.js@2.8.0', array(), false, true );
@@ -49,3 +49,31 @@ function snowfall_records_load_templates($original_template) {
   return $original_template;
 }
 add_action('template_include', 'snowfall_records_load_templates');
+
+// Single Snow Record Related Cities
+function snow_record_content_filter($content) {
+  $fullContent = $content;
+  if (is_singular('snowfall_records')) {
+    $current_city = get_post_meta(get_the_ID());
+    // related cities (in same state)
+    $query = new WP_Query( array( 
+      'post_type' => 'any',
+      'meta_key' => 'STATE',
+      'meta_value' => $current_city['STATE'][0],
+    ) );
+    if ( $query->have_posts() ) {
+      $fullContent .= "<h3>Other cities in " . $current_city['STATE'][0] . " that can be researched include:</h3>";
+      $fullContent .= "<ul>";
+      while ( $query->have_posts() ) {
+          $query->the_post();
+          $fullContent .= '<li><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></li>';
+      }
+      $fullContent .=  '</ul>';
+    }
+    wp_reset_postdata();
+    $fullContent .= '</ul>';
+  }
+  return $fullContent;
+}
+add_filter('the_content', 'snow_record_content_filter');
+

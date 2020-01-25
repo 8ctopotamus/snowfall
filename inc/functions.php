@@ -9,46 +9,47 @@ function generate_post_content($data) {
   $twoDaysEndDate = date('Y-m-d', strtotime($data['2 days DATE'] . " + 1 day"));
   $threeDaysEndDate = date('Y-m-d', strtotime($data['3 days DATE'] . " + 2 days"));
 
-  $content = '<p>First snows, Record snow, Multi-Day storms, Blizzards, and general snowfall information can be tough to find. You might be looking to move to a new city or have just moved and you are maybe fearful of how bad winter can get.</p>';
+  $content = "$cityState snowfall records are available covering one day record snows as well as two and three day cumulative snowfalls. SPN enlisted the help of some of the leading winter-expert Meteorologists to collect snow records throughout the United States. SPN has assimilated snow record data from over 220 U.S. Cities including $cityState.";
 
   // tabs
   $content .= '<div id="chart-tabs" class="tabs">
-  <nav class="tab-list">
-    <a class="tab tab-active" href="#one" data-idx="1">One Day</a>
-    <a class="tab" href="#two" data-idx="2">Two Days</a>
-    <a class="tab" href="#three" data-idx="3">Three Days</a>
-  </nav>';
+    <nav class="tab-list">
+      <a class="tab tab-active" href="#one" data-idx="1">One Day</a>
+      <a class="tab" href="#two" data-idx="2">Two Days</a>
+      <a class="tab" href="#three" data-idx="3">Three Days</a>
+    </nav>';
 
-  // one day tab
-  $content .= '<div id="one" class="tab-content tab-show">';
-    $content .= '<h3>Greatest Amount of Snow in One Day:</h3>';
-    $content .= '<p>The record of a one day snowfall for '. $cityState .' is ' . $data['1 days QTY'] . ' inches occurring on ' . nice_date( $data['1 days DATE'] ) . '.</p>';
-    $content .= '<canvas id="most-snow-1-days" aria-label="Most snow in one day" role="img">
-      <small>Greatest Amount of Snow in One Day</small>
-    </canvas>
-  </div>';
+    // one day tab
+    $content .= '<div id="one" class="tab-content tab-show">';
+      $content .= '<h3>Greatest Amount of Snow in One Day:</h3>';
+      $content .= "<strong>" . $data['1 days QTY'] . "in.</strong> — The one-day record snowfall for $cityState was recorded on " . nice_date( $data['1 days DATE'] ) . " as seen in the chart below.";
+      $content .= '<canvas id="most-snow-1-days" aria-label="Most snow in one day" role="img">
+        <small>Greatest Amount of Snow in One Day</small>
+      </canvas>
+    </div>';
 
-  // two days tab
-  $content .= '<div id="two" class="tab-content">';
-    $content .= '<h3>Greatest Amount of Snow in Two Days:</h3>';
-    $content .= 'The record of a one day snowfall for ' . $cityState . ' is ' . $data['2 days QTY'] . ' inches started on ' . nice_date( $data['2 days DATE'] ) . ' and ended on ' . nice_date( $twoDaysEndDate ) . '.';
-    $content .= '<canvas id="most-snow-2-days"> aria-label="Most snow in two days" role="img">
-      <small>Greatest Amount of Snow in Two Days</small>
-    </canvas>
-  </div>';
+    // two days tab
+    $content .= '<div id="two" class="tab-content">';
+      $content .= '<h3>Greatest Amount of Snow in Two Days:</h3>';
+      $content .= "<strong>" . $data['2 days QTY'] . "in.</strong> — The two-day cumulative snow record covered the period from " . nice_date( $data['2 days DATE'] ) . " to" . nice_date( $twoDaysEndDate ) . ".";
+      $content .= '<canvas id="most-snow-2-days"> aria-label="Most snow in two days" role="img">
+        <small>Greatest Amount of Snow in Two Days</small>
+      </canvas>
+    </div>';
 
-  // three days tab
-  $content .= '<div id="three" class="tab-content">';
-    $content .= '<h3>Greatest Amount of Snow in Three Days:</h3>';
-    
-    $content .= '<canvas id="most-snow-3-days">aria-label="Most snow in three days" role="img">
-      <small>Greatest Amount of Snow in Three Days</small>
-    </canvas>';
-    $content .= 'The record of a one day snowfall for ' . $cityState . ' is ' . $data['3 days QTY'] . ' inches started on ' . nice_date( $data['3 days DATE'] ) . ' and ended on ' . nice_date( $threeDaysEndDate ) . '.
-  </div>';
+    // three days tab
+    $content .= '<div id="three" class="tab-content">';
+      $content .= '<h3>Greatest Amount of Snow in Three Days:</h3>';
+      $content .= "<strong>" . $data['3 days QTY'] . "in.</strong> — The two-day cumulative snow record covered the period from " . nice_date( $data['3 days DATE'] ) . " to" . nice_date( $threeDaysEndDate ) . ".";
+      $content .= '<canvas id="most-snow-3-days">aria-label="Most snow in three days" role="img">
+        <small>Greatest Amount of Snow in Three Days</small>
+      </canvas>
+    </div>';
 
   $content .= '</div>'; // end of tabs
   
+  $content .= '<p>These snow records are reviewed yearly and updated as new data is recorded.</p>';
+
   // greatest snowfall
   $content .= '<h3>Greatest Snowfall in One Season:</h3>';
   $content .= '<p>At this point most folks are wondering what the greatest amount of snow has been recorded for ' . $cityState . ' in any given season.</p>';
@@ -57,18 +58,15 @@ function generate_post_content($data) {
     <small>Greatest Snowfall in One Season</small>
   </canvas>';
 
+  $content .= 'United States snow records can be found by reviewing the <a href="' . site_url() . '/snowfall_records">snowfall records of over 200 cities</a>.</p>';
   $content .= "<h3>Last Year's Storms - 12 Months in 1 Minute</h3>";
+  $content .= "<p>How busy and severe was the snow season this past year? Spend 1 minute reviewing all of the winter storms that affected the U.S.</p>";
   $content .= '<iframe src="https://www.snowplownews.com/snow-precipitation-animated.cfm" border="0" marginheight="0" marginwidth="0" scrolling="no" width="410" height="300" frameborder="1"></iframe>';
-
   $content .= '<a href="https://www.snowplownews.com/winter-weather-news.cfm" title="Snow Plow News - Winter Weather News / Snow Research"><p>Source: <cite>Snow Plow News - Winter Weather News / Snow Research</a></cite></p></a>';
-
   $content .= '<p>Winter snow records are typically hard to find so we first looked toward the <a href="https://www.noaa.gov" title="NOAA website" target="_blank" rel="noreferrer noopener">NOAA (National Oceanic and Atmospheric Association)</a> to see if these all-important records could be found.</p>
-  <p>Here is the records section of the NOAA site – it is not that easy to navigate.  We also found that these snowfall records do not exist in one spot – the records come from many reporting authorities all over the U.S.</p>';
-  $content .= '<img src="'. esc_url( plugins_url( '../img/noa-screenshot.jpg', __FILE__ ) ) .'" alt="Snow Plow News Winter Weather Research Screenshot">';
-  $content .= '<p>So we enlisted the help of some of the leading winter-expert Meteorologists to collect snow records throughout the United States. SPN has assimilated snow record data from over 220 U.S. Cities including ' . $cityState . '.</p>';
-  
+  <p>Here is the records section of the NOAA site – it is not that easy to navigate.  We also found that these snowfall records do not exist in one spot – the records come from many reporting authorities all over the U.S.</p>';  
   $content .= '<p>For additional snow and winter records research you can check out the <a href="' . site_url() . '/snowfall_records">SPN snow records page</a>.</p>';
-
+  
   return $content;
 }
 
