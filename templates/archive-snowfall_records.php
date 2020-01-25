@@ -6,23 +6,45 @@
 		<?php if ( have_posts() ) : ?>
 
 			<header class="page-header">
-				<?php
-					the_archive_title( '<h1 class="page-title">', '</h1>' );
+        <?php
+          echo "<h1 class=\"page-title\">Snowfall Records</h1>";
 					the_archive_description( '<div class="taxonomy-description">', '</div>' );
 				?>
 			</header>
 
-      <div class="snowfall-cities-grid">
-			<?php
-        while ( have_posts() ) :
-          the_post(); ?>
-            <a href="<?php the_permalink(); ?>" class="snowfall-city-link">
-              <img src="<?php echo plugin_dir_url( __DIR__ ) . 'img/snowfall-record-placeholder.jpg'; ?>" alt="<?php the_title(); ?>" />
-              <h3><?php the_title(); ?></h3>
-            </a>
-        <?php endwhile;
-      echo '</div>'; // /.snowfall-cities-grid
+      <?php 
+        $citiesByState = [];
 
+        while ( have_posts() ) : the_post(); 
+          $city = get_post_meta(get_the_ID());
+          $citiesByState[$city['STATE'][0]][] = [
+            'title' => get_the_title(),
+            'city' => $city['City'][0],
+            'permalink' => get_the_permalink(),
+          ];
+        endwhile; 
+
+        $citiesByState = array_reverse($citiesByState);
+
+        echo '<ul class="states-list">';
+          foreach(array_keys($citiesByState) as $state) {
+            echo '<li><a href="#'. $state .'">' . $state . '</a></li>';
+          }
+        echo '</ul>';
+
+        echo '<div class="states-posts">';
+        foreach($citiesByState as $state => $cities) {
+          echo '<div id="' . $state . '">';
+          echo "<h3>$state</h3>";
+          echo '<ul class="post-list">';
+          foreach($cities as $city) {
+            echo '<li><a href="#"></a>' . $city['city'] . '</li>';
+          }
+          echo "</ul>";
+          echo '</div>';
+        }
+        echo '</div>';
+      
         the_posts_pagination(
           array(
             'prev_text'          => __( 'Previous page', 'snowfall-records' ),

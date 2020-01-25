@@ -32,16 +32,7 @@ function snowfall_actions() {
   include( plugin_dir_path( __DIR__ ) . 'inc/actions.php' );
 }
 
-// order Archive alphabetically
-function alpha_order_classes( $query ) {
-  if ( $query->is_post_type_archive('snowfall_records') && $query->is_main_query() ) {
-    $query->set( 'orderby', 'title' );
-    $query->set( 'order', 'ASC' );
-  }
-}
-add_action( 'pre_get_posts', 'alpha_order_classes' );
-
-// Custom archive template
+// load custom archive template
 function snowfall_records_load_templates($original_template) {
   if (is_post_type_archive('snowfall_records')) {
     return plugin_dir_path(__DIR__) . 'templates/archive-snowfall_records.php';
@@ -49,6 +40,21 @@ function snowfall_records_load_templates($original_template) {
   return $original_template;
 }
 add_action('template_include', 'snowfall_records_load_templates');
+
+
+// order archive alphabetically
+function alpha_order_classes( $query ) {
+  if ( $query->is_post_type_archive('snowfall_records') && $query->is_main_query() && !is_admin() ) {
+    // $query->set( 'orderby', 'title' );
+    // $query->set( 'order', 'ASC' );
+    $query->set( 'posts_per_page', -1 );
+
+    // $query->set('meta_key', 'project_type');
+		// $query->set('meta_value', 'design');
+  }
+}
+add_action( 'pre_get_posts', 'alpha_order_classes' );
+
 
 // Single Snow Record Related Cities
 function snow_record_content_filter($content) {
