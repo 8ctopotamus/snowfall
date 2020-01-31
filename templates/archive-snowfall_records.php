@@ -38,7 +38,7 @@
           echo "<h3>$state</h3>";
           echo '<ul class="post-list">';
           foreach($cities as $city) {
-            echo '<li><a href="#"></a>' . $city['city'] . '</li>';
+            echo '<li><a href="' . $city['permalink'] . '">' . $city['city'] . '</a></li>';
           }
           echo "</ul>";
           echo '</div>';

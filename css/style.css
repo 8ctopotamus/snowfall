@@ -1,5 +1,4 @@
 /* Archive */
-
 .states-posts {
 	display: flex;
 	justify-content: center;
@@ -10,31 +9,6 @@
 	margin: 10px;
 }
 
-/* .snowfall-cities-grid {
-	display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  grid-gap: 1rem;
-} */
-/* 
-.snowfall-city-link {
-	display: block;
-	width: 100%;
-	text-align: center;
-}
-
-.snowfall-city-link img {
-	transition: opacity 250ms ease;
-}
-
-.snowfall-city-link:hover img {
-	opacity: .75;
-}
-
-.snowfall-city-link h3 {
-	background: white; 
-	color: #2e54b7;
-} */
-
 .states-list {
 	list-style-type: none;
 	display: flex;
@@ -44,6 +18,7 @@
 
 /* Single */
 .single-snowfall_records canvas {
+	background-color: white;
 	cursor: pointer;
 }
 

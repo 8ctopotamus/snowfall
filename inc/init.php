@@ -41,20 +41,13 @@ function snowfall_records_load_templates($original_template) {
 }
 add_action('template_include', 'snowfall_records_load_templates');
 
-
-// order archive alphabetically
-function alpha_order_classes( $query ) {
+// archive query
+function snowfall_records_archive_query( $query ) {
   if ( $query->is_post_type_archive('snowfall_records') && $query->is_main_query() && !is_admin() ) {
-    // $query->set( 'orderby', 'title' );
-    // $query->set( 'order', 'ASC' );
     $query->set( 'posts_per_page', -1 );
-
-    // $query->set('meta_key', 'project_type');
-		// $query->set('meta_value', 'design');
   }
 }
-add_action( 'pre_get_posts', 'alpha_order_classes' );
-
+add_action( 'pre_get_posts', 'snowfall_records_archive_query' );
 
 // Single Snow Record Related Cities
 function snow_record_content_filter($content) {

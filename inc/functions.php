@@ -63,8 +63,7 @@ function generate_post_content($data) {
   $content .= "<p>How busy and severe was the snow season this past year? Spend 1 minute reviewing all of the winter storms that affected the U.S.</p>";
   $content .= '<iframe src="https://www.snowplownews.com/snow-precipitation-animated.cfm" border="0" marginheight="0" marginwidth="0" scrolling="no" width="410" height="300" frameborder="1"></iframe>';
   $content .= '<a href="https://www.snowplownews.com/winter-weather-news.cfm" title="Snow Plow News - Winter Weather News / Snow Research"><p>Source: <cite>Snow Plow News - Winter Weather News / Snow Research</a></cite></p></a>';
-  $content .= '<p>Winter snow records are typically hard to find so we first looked toward the <a href="https://www.noaa.gov" title="NOAA website" target="_blank" rel="noreferrer noopener">NOAA (National Oceanic and Atmospheric Association)</a> to see if these all-important records could be found.</p>
-  <p>Here is the records section of the NOAA site – it is not that easy to navigate.  We also found that these snowfall records do not exist in one spot – the records come from many reporting authorities all over the U.S.</p>';  
+  $content .= '<p>Winter snow records are typically hard to find so we first looked toward the <a href="https://www.noaa.gov" title="NOAA website" target="_blank" rel="noreferrer noopener">NOAA (National Oceanic and Atmospheric Association)</a> to see if these all-important records could be found.</p>';  
   $content .= '<p>For additional snow and winter records research you can check out the <a href="' . site_url() . '/snowfall_records">SPN snow records page</a>.</p>';
   
   return $content;
