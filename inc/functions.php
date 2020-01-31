@@ -45,10 +45,11 @@ function generate_post_content($data) {
         <small>Greatest Amount of Snow in Three Days</small>
       </canvas>
     </div>';
+    
+    $content .= '<p>These snow records are reviewed yearly and updated as new data is recorded.</p>';
 
   $content .= '</div>'; // end of tabs
   
-  $content .= '<p>These snow records are reviewed yearly and updated as new data is recorded.</p>';
 
   // greatest snowfall
   $content .= '<h3>Greatest Snowfall in One Season:</h3>';
