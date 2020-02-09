@@ -7,7 +7,7 @@
 
 			<header class="page-header">
         <?php
-          echo "<h1 class=\"page-title\">Snowfall Records</h1>";
+          echo '<h1 class="page-title">Snowfall Records</h1>';
 					the_archive_description( '<div class="taxonomy-description">', '</div>' );
 				?>
 			</header>
@@ -35,7 +35,7 @@
         echo '<div class="states-posts">';
         foreach($citiesByState as $state => $cities) {
           echo '<div id="' . $state . '">';
-          echo "<h3>$state</h3>";
+          echo "<h3>" . $statesByAbbreviation[$state] . "</h3>";
           echo '<ul class="post-list">';
           foreach($cities as $city) {
             echo '<li><a href="' . $city['permalink'] . '">' . $city['city'] . '</a></li>';

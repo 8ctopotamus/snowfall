@@ -1,8 +1,21 @@
 /* Archive */
+.post-type-archive-snowfall_records .page-title {
+	text-align: center;
+}
+
+.post-type-archive-snowfall_records .taxonomy-description {
+	text-align: center;
+}
+
 .states-posts {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
 }
 
 .states-posts > * {
@@ -11,9 +24,14 @@
 
 .states-list {
 	list-style-type: none;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
 }
 
 /* Single */
@@ -45,6 +63,8 @@
 }
 
 .tab-list {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 }
 
@@ -54,14 +74,26 @@
 	border: 1px solid rgba(255, 255, 255, .6);
 }
 
-.tab-content {
+.tab-content,
+#greatest-snowfall {
+	background: -webkit-gradient(linear, left top, right bottom, from(white), to(#F8F8F8));
+	background: -o-linear-gradient(top left, white, #F8F8F8);
 	background: linear-gradient(to bottom right, white, #F8F8F8);
+  -webkit-box-shadow: 0 15px 20px -15px rgba(0, 0, 0, 0.3), 0 35px 50px -25px rgba(0, 0, 0, 0.3), 0 85px 60px -25px rgba(0, 0, 0, 0.1);
   box-shadow: 0 15px 20px -15px rgba(0, 0, 0, 0.3), 0 35px 50px -25px rgba(0, 0, 0, 0.3), 0 85px 60px -25px rgba(0, 0, 0, 0.1);
-	display: none;
 	padding: 1.5rem;
 	color: #4a5666;
+	margin-bottom: 60px;
+}
+
+.tab-content {
+	display: none;
 }
 
 .tab-show {
 	display: block;
+}
+
+.text-center {
+	text-align: center;
 }
