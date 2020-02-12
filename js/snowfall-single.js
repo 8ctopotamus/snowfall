@@ -1,5 +1,5 @@
 ;(function() {
-  const { all_snowfall_data, current_city, site_url } = wp_data;
+  const { all_snowfall_data, current_city, site_url, statesByAbbreviation } = wp_data;
   const defaultColor = '#71b1f1';
   const currentCityColor = '#2e54b7';
   const tabs = Array.from(document.getElementsByClassName('tab'));
@@ -54,7 +54,7 @@
       if (activePoints.length > 0) {
         const label = activePoints[0]._model.label;
         const city = label.split(' - ')[1].replace(' ', '-').toLowerCase();
-        const state = current_city['STATE'][0].toLowerCase();
+        const state = statesByAbbreviation[current_city['STATE'][0]]// current_city['STATE'][0].toLowerCase();
         const url = `${site_url}/snowfall_records/${city}-${state}`;
         window.location = url;
       }
