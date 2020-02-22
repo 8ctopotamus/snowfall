@@ -53,8 +53,8 @@
       var activePoints = chart.getElementsAtEvent(evt);
       if (activePoints.length > 0) {
         const label = activePoints[0]._model.label;
-        const city = label.split(' - ')[1].replace(' ', '-').toLowerCase();
-        const state = statesByAbbreviation[current_city['STATE'][0]]// current_city['STATE'][0].toLowerCase();
+        const city = label.replace(' ', '-').toLowerCase();
+        const state = statesByAbbreviation[current_city['STATE'][0]].toLowerCase();
         const url = `${site_url}/snowfall_records/${city}-${state}`;
         window.location = url;
       }
@@ -62,9 +62,9 @@
   }
 
   function renderDayChart(idx) {
-    const id = `most-snow-${idx}-days`
+    const id = `most-snow-${idx}-days`;
     const ctx = getCanvas(id);
-    const cityNames = state_snowfall_data.map(city => `${city['Name']} - ${city['City']}`);
+    const cityNames = state_snowfall_data.map(city => `${city['City']}`);
     const dates = state_snowfall_data.map(city => city[`${idx} days DATE`]);
     const qty = state_snowfall_data.map(city => city[`${idx} days QTY`]);
     const newChart = renderHorizBarChart(ctx, cityNames, dates, qty);
@@ -72,9 +72,9 @@
   };
 
   function renderGreatestChart() {
-    const id = 'greatest-snowfall'
+    const id = 'greatest-snowfall';
     const ctx = getCanvas(id);
-    const cityNames = state_snowfall_data.map(city => `${city['Name']} - ${city['City']}`);
+    const cityNames = state_snowfall_data.map(city => `${city['City']}`);
     const dates = state_snowfall_data.map(city => city['GreatestEndingDate']);
     const qty = state_snowfall_data.map(city => city['Greatest Snowfall']);
     const newChart = renderHorizBarChart(ctx, cityNames, dates, qty);
