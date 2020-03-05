@@ -131,3 +131,12 @@ function snow_record_content_filter($content) {
 }
 add_filter('the_content', 'snow_record_content_filter');
 
+// Add back link to snowfall_records Archive to posts.
+function snow_records_filter_the_title( $content ) {
+  if (is_singular('snowfall_records')):
+    $custom_content = '<p><a href="' . site_url("/snowfall_records/") . '">&larr; View all records</a></p>';
+    $content = $custom_content . $content;
+  endif;
+  return $content;
+}
+add_filter( 'the_content', 'snow_records_filter_the_title' );
