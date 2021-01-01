@@ -66,14 +66,14 @@ function snowfall_scripts() {
   wp_register_script( 'snowfall_records_archive', plugins_url('js/snowfall-archive.js', __DIR__ ), array('jquery'), false, true );
   wp_register_script( 'snowfall_records_single', plugins_url('js/snowfall-single.js', __DIR__ ), array(), false, true );
   
-  if (is_archive('snowfall_records') ) {
+  if ( is_archive('snowfall_records') ) {
     wp_enqueue_style( 'snowfall_styles' );
     wp_enqueue_script( 'raphael' );
     wp_enqueue_script( 'usmap' );
     wp_enqueue_script( 'snowfall_records_archive' );
   }
 
-  if (is_singular('snowfall_records')) {
+  if ( is_singular('snowfall_records') ) {
     wp_enqueue_style( 'snowfall_styles' );
     wp_enqueue_script( 'chart_js' );
     wp_localize_script( 'snowfall_records_single', 'wp_data', array(

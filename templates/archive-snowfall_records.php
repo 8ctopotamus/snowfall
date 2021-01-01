@@ -12,7 +12,9 @@
 				?>
 			</header>
 
-      <div id="map"></div>
+      <div id="map-wrap">
+        <div id="map"></div>
+      </div>
 
       <?php 
         $citiesByState = [];

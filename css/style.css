@@ -7,6 +7,13 @@
 	text-align: center;
 }
 
+#map-wrap {
+	display: flex;
+	justify-content: center;
+	max-width: 1040px;
+	margin: 0 auto;
+}
+
 .states-posts {
 	display: -webkit-box;
 	display: -ms-flexbox;
