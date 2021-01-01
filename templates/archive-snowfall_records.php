@@ -12,9 +12,7 @@
 				?>
 			</header>
 
-      <div id="map-wrap">
-        <div id="map"></div>
-      </div>
+      <div id="vmap"></div>
 
       <?php 
         $citiesByState = [];

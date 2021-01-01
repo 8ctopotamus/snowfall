@@ -56,20 +56,23 @@ $statesByAbbreviation = [
 function snowfall_scripts() {
   global $statesByAbbreviation;
   global $post;
+  
   $all_cities = get_option('all_snowfall_data');
   $current_city = get_post_meta($post->ID);
 
+  wp_register_style( 'vmap_styles', 'https://cdnjs.cloudflare.com/ajax/libs/jqvmap/1.5.1/jqvmap.min.css' );  
   wp_register_style( 'snowfall_styles', plugins_url('css/style.css', __DIR__ ) );  
   wp_register_script( 'chart_js', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js', array(), false, true );
-  wp_register_script( 'raphael', 'https://cdnjs.cloudflare.com/ajax/libs/raphael/2.0.0/raphael-min.js', array(), false, true );
-  wp_register_script( 'usmap', 'https://cdnjs.cloudflare.com/ajax/libs/us-map/1.0.1/jquery.usmap.min.js', array('jquery'), false, true );
+  wp_register_script( 'vmap', 'https://cdnjs.cloudflare.com/ajax/libs/jqvmap/1.5.1/jquery.vmap.min.js', array('jquery'), false, true );
+  wp_register_script( 'vmap_usa', 'https://cdnjs.cloudflare.com/ajax/libs/jqvmap/1.5.1/maps/jquery.vmap.usa.js', array('jquery'), false, true );
   wp_register_script( 'snowfall_records_archive', plugins_url('js/snowfall-archive.js', __DIR__ ), array('jquery'), false, true );
   wp_register_script( 'snowfall_records_single', plugins_url('js/snowfall-single.js', __DIR__ ), array(), false, true );
   
   if ( is_archive('snowfall_records') ) {
+    wp_enqueue_style( 'vmap_styles' );
     wp_enqueue_style( 'snowfall_styles' );
-    wp_enqueue_script( 'raphael' );
-    wp_enqueue_script( 'usmap' );
+    wp_enqueue_script( 'vmap' );
+    wp_enqueue_script( 'vmap_usa' );
     wp_enqueue_script( 'snowfall_records_archive' );
   }
 
