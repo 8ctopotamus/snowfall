@@ -12,6 +12,8 @@
 				?>
 			</header>
 
+      <div id="map"></div>
+
       <?php 
         $citiesByState = [];
 
@@ -25,7 +27,6 @@
         endwhile; 
 
         $citiesByState = array_reverse($citiesByState);
-
         echo '<ul class="states-list">';
           foreach(array_keys($citiesByState) as $state) {
             echo '<li><a href="#'. $state .'">' . $state . '</a></li>';

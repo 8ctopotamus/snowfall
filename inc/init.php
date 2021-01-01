@@ -60,11 +60,17 @@ function snowfall_scripts() {
   $current_city = get_post_meta($post->ID);
 
   wp_register_style( 'snowfall_styles', plugins_url('css/style.css', __DIR__ ) );  
-  wp_register_script( 'chart_js', 'https://cdn.jsdelivr.net/npm/chart.js@2.8.0', array(), false, true );
+  wp_register_script( 'chart_js', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js', array(), false, true );
+  wp_register_script( 'raphael', 'https://cdnjs.cloudflare.com/ajax/libs/raphael/2.0.0/raphael-min.js', array(), false, true );
+  wp_register_script( 'usmap', 'https://cdnjs.cloudflare.com/ajax/libs/us-map/1.0.1/jquery.usmap.min.js', array('jquery'), false, true );
+  wp_register_script( 'snowfall_records_archive', plugins_url('js/snowfall-archive.js', __DIR__ ), array('jquery'), false, true );
   wp_register_script( 'snowfall_records_single', plugins_url('js/snowfall-single.js', __DIR__ ), array(), false, true );
   
   if (is_archive('snowfall_records') ) {
     wp_enqueue_style( 'snowfall_styles' );
+    wp_enqueue_script( 'raphael' );
+    wp_enqueue_script( 'usmap' );
+    wp_enqueue_script( 'snowfall_records_archive' );
   }
 
   if (is_singular('snowfall_records')) {
@@ -96,13 +102,16 @@ function snowfall_records_load_templates($original_template) {
 }
 add_action('template_include', 'snowfall_records_load_templates');
 
-// archive query
+// // archive query
 function snowfall_records_archive_query( $query ) {
-  if ( $query->is_post_type_archive('snowfall_records') && $query->is_main_query() && !is_admin() ) {
-    $query->set( 'posts_per_page', -1 );
+ 
+	// attorneys archive
+	if ( !is_admin() && $query->is_main_query() && is_post_type_archive( 'snowfall_records' ) ) {
+		$query->set( 'posts_per_page', '-1' );
+	  }
   }
-}
-add_action( 'pre_get_posts', 'snowfall_records_archive_query' );
+  add_action( 'pre_get_posts', 'snowfall_records_archive_query', 100 );
+
 
 // Single Snow Record Related Cities
 function snow_record_content_filter($content) {
@@ -131,12 +140,3 @@ function snow_record_content_filter($content) {
 }
 add_filter('the_content', 'snow_record_content_filter');
 
-// Add back link to snowfall_records Archive to posts.
-function snow_records_filter_the_title( $content ) {
-  if (is_singular('snowfall_records')):
-    $custom_content = '<p><a href="' . site_url("/snowfall_records/") . '">&larr; View all records</a></p>';
-    $content = $custom_content . $content;
-  endif;
-  return $content;
-}
-add_filter( 'the_content', 'snow_records_filter_the_title' );
