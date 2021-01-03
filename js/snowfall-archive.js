@@ -1,11 +1,15 @@
 ;(function($) {
   $(document).ready(function() {
-    const $vMap = $('#vmap');
-    $vMap.vectorMap({ 
+    $('#vmap').vectorMap({ 
       map: 'usa_en', 
       onRegionClick: function(event, code, region) {
-        $(`a[href="#${code.toUpperCase()}"]`).click()
+        const stateCode = code.toUpperCase();
+        const cityList = $(`div#${stateCode}`);
+        const highlightClass = 'highlight';
+        $(`a[href="#${stateCode}"]`).click();
+        cityList.addClass(highlightClass);
+        setTimeout(() => cityList.removeClass(highlightClass), 2200);
       }
     });
-  })
+  });
 })(jQuery);
