@@ -12,7 +12,20 @@
 				?>
 			</header>
 
+      <!-- map -->
       <div id="vmap"></div>
+
+      <!-- modal -->
+      <div id="cities-modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2 class="modal-title"></h2>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
 
       <?php 
         $citiesByState = [];
