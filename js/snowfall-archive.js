@@ -13,7 +13,7 @@
       map: 'usa_en', 
       onRegionClick: function(event, code, region) {
         const stateCode = code.toUpperCase();
-        const $cityList = $(`div#${stateCode}`);
+        const $cityList = $(`div#${stateCode}`).clone();
         $modalTitle.html($cityList.find('h3').text());
         $modalBody.html($cityList.find('ul'));
         toggleModal();
